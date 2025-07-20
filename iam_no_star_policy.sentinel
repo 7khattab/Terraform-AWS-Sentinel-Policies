@@ -1,0 +1,13 @@
+####################################################
+# Sentinel Policy: iam_no_star_policy.sentinel
+####################################################
+import "tfplan"
+
+main = rule {
+  all tfplan.resource_changes as rc {
+    rc.type is "aws_iam_policy" and
+    not any rc.change.after.policy.Document.Statement as stmt {
+      stmt.Action contains "*" or stmt.Resource contains "*"
+    }
+  }
+}

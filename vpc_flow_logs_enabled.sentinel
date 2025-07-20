@@ -1,0 +1,11 @@
+######################################################
+# Sentinel Policy: vpc_flow_logs_enabled.sentinel
+######################################################
+import "tfplan"
+
+main = rule {
+  all tfplan.resource_changes as rc {
+    rc.type is "aws_flow_log" or rc.type is "aws_vpc" and
+    rc.change.after.flow_logs_enabled is true
+  }
+}

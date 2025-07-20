@@ -1,0 +1,11 @@
+#############################################
+# Sentinel Policy: aws_instance_type.sentinel
+#############################################
+import "tfplan"
+
+main = rule {
+  all tfplan.resource_changes as rc {
+    rc.type is "aws_instance" and
+    rc.change.after.instance_type in ["t3.micro", "t3.small", "t3.medium"]
+  }
+}

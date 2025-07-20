@@ -1,0 +1,12 @@
+########################################################
+# Sentinel Policy: rds_encryption_enabled.sentinel
+########################################################
+import "tfplan"
+
+main = rule {
+  all tfplan.resource_changes as rc {
+    rc.type is "aws_db_instance" and
+    rc.change.after.storage_encrypted is true and
+    rc.change.after.kms_key_id is not null
+  }
+}

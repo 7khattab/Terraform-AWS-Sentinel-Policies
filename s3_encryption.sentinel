@@ -1,0 +1,11 @@
+#########################################
+# Sentinel Policy: s3_encryption.sentinel
+#########################################
+import "tfplan"
+
+main = rule {
+  all tfplan.resource_changes as rc {
+    rc.type is "aws_s3_bucket" and
+    rc.change.after.server_side_encryption_configuration is not null
+  }
+}
