@@ -52,7 +52,3 @@ soft-mandatory: Block applies, but can override
 hard-mandatory: Block applies with no override
 
 
-🧪 Testing Sentinel Policies
-      # Validate a policy locally
-      sentinel test -policy policies/aws_instance_type.sentinel
-You must have the Sentinel CLI installed.
